@@ -1,0 +1,270 @@
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Розв'язування геометричних задач</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f2f2;
+      color: #333;
+    }
+    header {
+      background: #fff;
+      padding: 30px;
+      text-align: center;
+      border-bottom: 3px solid #4CAF50;
+    }
+    header h1 {
+      font-size: 36px;
+      font-weight: bold;
+    }
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      margin-top: 40px;
+      color: #2e7d32;
+    }
+    .image-container {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .image-container img {
+      width: 100%;
+      max-width: 600px;
+      cursor: pointer;
+    }
+    .solution {
+      white-space: pre-wrap;
+      background: #eef;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    #fullscreenView {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    #fullImageContainer {
+      position: relative;
+      max-width: 90%;
+      max-height: 70vh;
+      margin-bottom: 20px;
+    }
+    #fullImage {
+      max-width: 100%;
+      max-height: 70vh;
+      border: 2px solid #fff;
+      border-radius: 5px;
+    }
+    #drawCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .full-content {
+      max-width: 90%;
+      max-height: 20vh;
+      overflow-y: auto;
+      color: #fff;
+      background: #333;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .tools {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .tools button {
+      padding: 8px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #4CAF50;
+      color: white;
+    }
+    .tools button:hover {
+      background: #45a049;
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      background: #f44336;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Розв'язування геометричних задач</h1>
+    <p><strong>Любін Андрій</strong></p>
+    <p>На цьому сайті будуть надані розв'язки задач різних рівнів</p>
+  </header>
+  <main>
+    <h2>Задача 1</h2>
+    <p><strong>EGMO 2025 P4</strong></p>
+    <p>Нехай ABC — гострокутний трикутник з центром вписаного кола у точці I. Нехай D, E, F — точки дотику вписаного кола до сторін BC, AC, AB відповідно. Нехай K, L, M — точки симетричні точкам D, E, F відносно I. Довести, що прямі AK, BL, CM перетинаються в одній точці.</p>
+    <div class="image-container">
+      <img src="https://imgur.com/EOURM1X.png" alt="Задача 1" onclick="openFullscreen(this)">
+    </div>
+    <div class="solution">
+      <strong>Розв'язок:</strong>
+      Нехай радіус описаного кола ABC R = 1/2, кути A, B, C рівні 2a, 2b, 2c. a + b + c = 90.
+AP = CP = CS = sinb
+AQ = BQ = BR = sinc
+BC = sin2a = 2sina*cosa
+Кути ACT = b, ABT = c. Відповідно кути BCT = 2c - b, CBT = 2b - c тому кут BTC = 90 + a = BIC.
+CI = BC/sin(90+a) * sinb = 2sina*sinb
+BI = 2sina*sinc
+Кут SCI = SCA + ACI = 180 - b + c.
+Кут (рахуємо від RB проти годинникової стрілки) RBI = RBA + ABI = 180 - c + b = 360 - SCI. - значить трикутники SCI і RBI мають однаковий кут при вершинах C і B, але I знаходиться по різні сторони прямих ST, RT.
+sin(SIC) = SC / SI * sin(SCI) = sinb * sin(SCI) / SI
+sin(BIR) = BR / RI * sin(RBI) = sinc * sin(SCI) / RI.
+Щоб показати що SITR вписаний достатньо показати що кут SIR = STR = CTB = CIB, що рівносильно рівності кутів SIC = BIR або SI / RI = sinb / sinc.
+За теоремою косинусів SI^2 = SC^2 + CI^2 - 2*SC*CI*cos(SCI) = sinb^2 + 4*sinb^2*sina^2 - 4*sinb^2*sina*cos(SCI) = (sinb/sinc)^2 * (sinc^2 + 4*sinc^2*sina^2 - 4*sinc^2*sina*cos(RBI)) = (sinb/sinc * RI)^2 звідки й випливає потрібна рівність.
+    </div>
+
+    <h2>Задача 2</h2>
+    <p><strong>Задача про площу трикутника</strong></p>
+    <p>Через точку X всередині трикутника ABC провести пряму, яка ділить площу трикутника навпіл.</p>
+    <div class="image-container">
+      <img src="https://imgur.com/jN0fOQk.png" alt="Задача 2" onclick="openFullscreen(this)">
+    </div>
+    <div class="solution">
+      <strong>Розв'язок:</strong>
+Точка Х всередині трикутника
+   Нехай UV - шукана пряма, якій належить точ-
+   ка X,d, id2 - перпендикуляри, опущені з точки
+   Х на сторони АС i ВС. Нехай CU = x, CV = у.
+   Складемо перше рівняння:
+   2(d_1*x+d_2*y)=a*ha.
+   Складемо друге рівняння:
+   2 xy = ab.
+   таким чином,
+   2d2x^2 - aha + abd_2 
+    </div>
+  </main>
+
+  <div id="fullscreenView">
+    <div class="close-btn" onclick="closeFullscreen()">×</div>
+    <div id="fullImageContainer">
+      <img id="fullImage" src="" alt="Full view">
+      <canvas id="drawCanvas"></canvas>
+    </div>
+    <div class="full-content" id="fullText"></div>
+    <div class="tools">
+      <button onclick="setTool('pen')">✏️ Олівець</button>
+      <button onclick="setTool('eraser')">🧽 Гумка</button>
+      <button onclick="clearCanvas()">🗑 Очистити</button>
+    </div>
+  </div>
+
+  <script>
+    let currentTool = 'pen';
+    const canvas = document.getElementById('drawCanvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    function resizeCanvas() {
+      const img = document.getElementById('fullImage');
+      canvas.width = img.offsetWidth;
+      canvas.height = img.offsetHeight;
+      canvas.style.width = img.offsetWidth + 'px';
+      canvas.style.height = img.offsetHeight + 'px';
+    }
+
+    function openFullscreen(img) {
+      document.getElementById('fullscreenView').style.display = 'flex';
+      document.getElementById('fullImage').src = img.src;
+      
+      const taskContainer = img.closest('.image-container').nextElementSibling;
+      document.getElementById('fullText').textContent = taskContainer.textContent;
+
+      setTimeout(() => {
+        resizeCanvas();
+      }, 50);
+    }
+
+    function closeFullscreen() {
+      document.getElementById('fullscreenView').style.display = 'none';
+      clearCanvas();
+    }
+
+    function setTool(tool) {
+      currentTool = tool;
+      canvas.style.pointerEvents = tool === 'eraser' ? 'auto' : 'auto';
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+      drawing = true;
+      lastX = e.offsetX;
+      lastY = e.offsetY;
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      drawing = false;
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!drawing) return;
+      
+      ctx.lineWidth = currentTool === 'pen' ? 3 : 20;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = currentTool === 'pen' ? 'red' : 'rgba(0,0,0,1)';
+      ctx.globalCompositeOperation = currentTool === 'pen' ? 'source-over' : 'destination-out';
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+
+      lastX = e.offsetX;
+      lastY = e.offsetY;
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+  </script>
+</body>
+</html>
+
